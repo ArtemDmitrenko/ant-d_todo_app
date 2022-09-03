@@ -1,0 +1,9 @@
+.add-todo {
+  display: flex;
+  justify-content: space-between;
+
+  &__input {
+    width: 100%;
+    margin-right: 20px;
+  }
+}

@@ -1,26 +1,33 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import AddTodo from './components/AddTodo/AddTodo';
+import TodoList from './components/TodoList/TodoList';
+import { Typography } from 'antd';
 
-function App() {
+import './App.scss';
+import 'antd/dist/antd.min.css';
+
+const { Title } = Typography;
+
+const App: React.FC = () => {
+  const [todosList, setTodosList] = useState<string[]>([]);
+
+  const handleAddTodo = (todo: string): void => {
+    setTodosList((prevState) => [...prevState, todo]);
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="App__title">
+        <Title>Todo App</Title>
+      </div>
+      <div className="App__input">
+        <AddTodo onSubmit={handleAddTodo} />
+      </div>
+      <div className="App__todoList">
+        <TodoList list={todosList} />
+      </div>
     </div>
   );
-}
+};
 
 export default App;

@@ -1,0 +1,12 @@
+.todo-list {
+  &__item {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__button {
+    min-width: 32px;
+    margin-left: 25px;
+  }
+}
