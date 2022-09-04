@@ -3,35 +3,42 @@ import { Button, Input } from 'antd';
 
 import './add-todo.scss';
 
+const { TextArea } = Input;
+
 interface IAddTodoProps {
-  onSubmit: (todo: string) => void;
+  onClick: (todo: string) => any;
 }
 
-const AddTodo: React.FC<IAddTodoProps> = ({ onSubmit }) => {
+const AddTodo: React.FC<IAddTodoProps> = ({ onClick }) => {
   const [todoText, setTodoText] = useState<string>('');
-  const handleInputChange = (e: React.FormEvent<HTMLInputElement>): void => {
+  const handleInputChange = (e: React.FormEvent<HTMLTextAreaElement>): void => {
     const {
       currentTarget: { value },
     } = e;
-    setTodoText(value);
+    value.charAt(0) === ' ' ? setTodoText('') : setTodoText(value);
   };
 
-  const handleSubmit = (): void => {
+  const handleBtnClick = (): void => {
     setTodoText('');
-    onSubmit(todoText);
+    onClick(todoText);
   };
 
   return (
     <div className="add-todo">
       <div className="add-todo__input">
-        <Input
+        <TextArea
+          rows={1}
           placeholder="Todo"
           onChange={handleInputChange}
           value={todoText}
         />
       </div>
       <div className="add-todo__button">
-        <Button type="primary" onClick={handleSubmit}>
+        <Button
+          type="primary"
+          disabled={todoText === ''}
+          onClick={handleBtnClick}
+        >
           Add todo
         </Button>
       </div>
